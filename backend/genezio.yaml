@@ -1,0 +1,14 @@
+name: Todos-App-React
+region: us-east-1
+sdk:
+  language: js
+  options:
+    runtime: node
+  path: ../frontend/src/backend_sdk/
+classes:
+  - path: task.js
+    type: jsonrpc
+    methods: []
+  - path: user.js
+    type: jsonrpc
+    methods: []
