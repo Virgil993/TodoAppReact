@@ -1,0 +1,59 @@
+.login-title{
+    font-size: 25px;
+}
+
+.login-header{
+    margin: 0 auto !important;
+}
+.login-container{
+    display: grid !important; 
+    background-color:aquamarine;
+    width: 700px;
+    border-radius: 25px;
+    margin: 0 auto !important;
+    margin-top: 30px !important;
+}
+
+.form-login{
+    margin-top: 0px !important;
+    justify-content: center;
+}
+
+.login-submit{
+    text-align: center;
+}
+
+.login-alert{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.register-title{
+    font-size: 25px;
+}
+
+.register-header{
+    margin: 0 auto !important;
+}
+.register-container{
+    display: grid !important; 
+    background-color:aquamarine;
+    width: 700px;
+    border-radius: 25px;
+    margin: 0 auto !important;
+    margin-top: 30px !important;
+}
+
+.form-register{
+    margin-top: 0px !important;
+    justify-content: center;
+}
+
+.register-submit{
+    text-align: center;
+}
+
+.register-alert{
+    margin: 0 auto;
+    text-align: center;
+}
