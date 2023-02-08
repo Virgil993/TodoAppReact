@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const StyledTodo = styled.div`
   border-radius: 25px;
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 400px;
   background-color: ${(props) => {
     if (props.completed === false) {
       return "cadetblue";

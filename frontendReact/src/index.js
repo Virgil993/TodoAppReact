@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
-import store from "./redux/store";
-import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import AllTodos from "./views/AllTodos";
 import Register from "./views/Register";
 import Login from "./views/Login";
+import AdminLayout from "./layouts/Admin";
+import AuthLayout from "./layouts/Auth";
 
 import "./components/styles/main.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -14,9 +14,18 @@ import "bootstrap/dist/css/bootstrap.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Provider store={store}>
-      <Register />
-    </Provider>
+    <Routes>
+      <Route
+        path="/admin/allTodos"
+        element={<AdminLayout element={<AllTodos />} />}
+      />
+      <Route path="/auth/login" element={<AuthLayout element={<Login />} />} />
+      <Route
+        path="/auth/register"
+        element={<AuthLayout element={<Register />} />}
+      />
+      <Route path="*" element={<Navigate to="/auth/login" />} />
+    </Routes>
   </BrowserRouter>
 );
 

@@ -4,7 +4,7 @@ sdk:
   language: js
   options:
     runtime: browser
-  path: ../frontend/src/backend_sdk/
+  path: ../frontendReact/src/backend_sdk/
 classes:
   - path: task.js
     type: jsonrpc

@@ -12,7 +12,6 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(event) {
     setError(null);
@@ -24,15 +23,11 @@ function Login(props) {
       return;
     }
 
-    setIsSubmitting(true);
-
     const res = await User.login(email, password).catch((err) => {
       setError(err.msg);
       console.log(err.error);
-      setIsSubmitting(false);
       return;
     });
-    setIsSubmitting(false);
     if (!res.success) {
       setError(res.msg);
       console.log(res.msg);

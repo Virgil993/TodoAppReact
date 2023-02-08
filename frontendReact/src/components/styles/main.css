@@ -57,3 +57,22 @@
     margin: 0 auto;
     text-align: center;
 }
+
+.all-todos-container{
+    display: grid !important;
+}
+
+.add-todo-form{
+    justify-content: center;
+}
+
+.add-todo-form-label{
+    justify-content: center;
+}
+.add-todo-form-input{
+    justify-content: center;
+}
+
+.todos-container{
+    justify-content: center;
+}

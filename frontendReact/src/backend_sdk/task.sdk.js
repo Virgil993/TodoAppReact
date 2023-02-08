@@ -16,12 +16,16 @@
           return Task.remote.call("Task.getById", token, id)  
       }
   
-      static async create(token, title, description) {
-          return Task.remote.call("Task.create", token, title, description)  
+      static async getByOwnerId(token) {
+          return Task.remote.call("Task.getByOwnerId", token)  
       }
   
-      static async update(token, id, title, description, status) {
-          return Task.remote.call("Task.update", token, id, title, description, status)  
+      static async create(token, title, description, ownerId) {
+          return Task.remote.call("Task.create", token, title, description, ownerId)  
+      }
+  
+      static async update(token, id, title, description, solved, ownerId) {
+          return Task.remote.call("Task.update", token, id, title, description, solved, ownerId)  
       }
   
       static async delete(token, id) {

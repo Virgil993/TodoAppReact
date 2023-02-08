@@ -8,7 +8,11 @@ const tasksSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  status: {
+  solved: {
+    type: Boolean,
+    required: true,
+  },
+  ownerId: {
     type: String,
     required: true,
   },

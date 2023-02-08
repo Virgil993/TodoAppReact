@@ -1,6 +1,6 @@
 import activeSession from "./models/activeSession";
 
-async function reqAuth(token) {
+export async function reqAuth(token) {
   const session = await activeSession.find({ token: token });
   if (session.length === 1) {
     return {
@@ -21,5 +21,3 @@ export const MONGO_DB_URI =
   "mongodb+srv://Virgil993:SjljSZMJmkEkqKB2@cluster0.znunadm.mongodb.net/toDo";
 
 export const secret = "secretkey";
-
-export default reqAuth;

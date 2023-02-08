@@ -39,23 +39,40 @@ export class Task {
     return { success: true, elements: element };
   }
 
-  async create(token, title, description) {
+  async getByOwnerId(token) {
     const authObject = await reqAuth(token);
     if (!authObject.success) {
       return { success: false, msg: authObject.msg };
     }
-    if (title == null || description == null) {
+
+    const ownerId = authObject.userId;
+
+    if (!ownerId) {
+      return { success: false, msg: "OwnerId not found" };
+    }
+
+    const elements = await TaskModel.find({ ownerId: ownerId });
+    return { success: true, elements: elements };
+  }
+
+  async create(token, title, description, ownerId) {
+    const authObject = await reqAuth(token);
+    if (!authObject.success) {
+      return { success: false, msg: authObject.msg };
+    }
+    if (title == null || description == null || ownerId == null) {
       return { success: false, msg: "required fields are empty" };
     }
     const newObj = await TaskModel.create({
       title: title,
       description: description,
-      status: false,
+      solved: false,
+      ownerId: ownerId,
     });
     return { success: true, elemId: newObj._id };
   }
 
-  async update(token, id, title, description, status) {
+  async update(token, id, title, description, solved, ownerId) {
     const authObject = await reqAuth(token);
     if (!authObject.success) {
       return { success: false, msg: authObject.msg };
@@ -73,8 +90,12 @@ export class Task {
       dataToSet.description = description;
     }
 
-    if (status != null) {
-      dataToSet.status = status;
+    if (solved != null) {
+      dataToSet.solved = solved;
+    }
+
+    if (ownerId != null) {
+      dataToSet.ownerId = ownerId;
     }
 
     const newValues = { $set: dataToSet };
