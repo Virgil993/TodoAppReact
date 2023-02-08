@@ -3,7 +3,7 @@ region: us-east-1
 sdk:
   language: js
   options:
-    runtime: node
+    runtime: browser
   path: ../frontend/src/backend_sdk/
 classes:
   - path: task.js
