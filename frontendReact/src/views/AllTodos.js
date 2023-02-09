@@ -75,6 +75,67 @@ function AllTodos() {
     setDescription("");
   }
 
+  async function handleFinishTodo(id, currentSolvedValue) {
+    const res = await Task.update(
+      localStorage.getItem("apiToken"),
+      id,
+      null,
+      null,
+      !currentSolvedValue,
+      null
+    ).catch((err) => {
+      setError(err.msg);
+      console.log(err.error);
+
+      return;
+    });
+
+    if (!res) {
+      setError("Unknown error, please try again later");
+      console.log("Error at the Database");
+      return;
+    }
+    if (!res.success) {
+      setError(res.msg);
+      console.log(res.msg);
+      return;
+    }
+    var newTodos = todos;
+    for (const elem of newTodos) {
+      if (elem._id === id) {
+        elem.solved = !currentSolvedValue;
+        break;
+      }
+    }
+    setTodos(newTodos);
+  }
+
+  async function handleDeleteTodo(id) {
+    const res = await Task.delete(localStorage.getItem("apiToken"), id).catch(
+      (err) => {
+        setError(err.msg);
+        console.log(err.error);
+
+        return;
+      }
+    );
+
+    if (!res) {
+      setError("Unknown error, please try again later");
+      console.log("Error at the Database");
+      return;
+    }
+    if (!res.success) {
+      setError(res.msg);
+      console.log(res.msg);
+      return;
+    }
+    var newTodos = todos.filter((elem) => {
+      return elem._id !== id;
+    });
+    setTodos(newTodos);
+  }
+
   return (
     <StyledContainer className="all-todos-container">
       <UserHead />
@@ -126,14 +187,14 @@ function AllTodos() {
             <StyledP>
               <ClassicButton
                 type="button"
-                onClick={() => console.log("hello")}
+                onClick={() => handleDeleteTodo(todo._id)}
                 text="Remove Task"
               />
             </StyledP>
             <StyledP>
               <ClassicButton
                 type="button"
-                onClick={() => console.log("Hello")}
+                onClick={() => handleFinishTodo(todo._id, todo.solved)}
                 text="Finish Task"
               />
             </StyledP>
