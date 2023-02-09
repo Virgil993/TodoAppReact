@@ -8,6 +8,7 @@ import { StyledP } from "../components/styles/P.styled";
 import { StyledAddTodo } from "../components/styles/AddTodo.styled";
 import { Alert } from "reactstrap";
 import { StyledTodo } from "../components/styles/Todo.styled";
+import { User } from "../backend_sdk/user.sdk";
 
 function AllTodos() {
   const navigate = useNavigate();
@@ -28,6 +29,31 @@ function AllTodos() {
     }
     getTodos();
   });
+
+  async function handleLogout(event) {
+    event.preventDefault();
+    const res = await User.logout(localStorage.getItem("apiToken")).catch(
+      (err) => {
+        setError(err.msg);
+        console.log(err.error);
+
+        return;
+      }
+    );
+
+    if (!res) {
+      setError("Unknown error, please try again later");
+      console.log("Error at the Database");
+      return;
+    }
+    if (!res.success) {
+      setError(res.msg);
+      console.log(res.msg);
+      return;
+    }
+    localStorage.clear();
+    navigate("/auth/login");
+  }
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -138,6 +164,9 @@ function AllTodos() {
 
   return (
     <StyledContainer className="all-todos-container">
+      <StyledP>
+        <ClassicButton type="submit" onClick={handleLogout} text="Log out" />
+      </StyledP>
       <UserHead />
       <StyledContainer>
         <StyledAddTodo>
